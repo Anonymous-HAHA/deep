@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You, My Friend</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0c27b 0%, #4b1248 100%);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      transition: background-image 0.6s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #ffe6e6;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 0 0 2rem;
+      font-style: italic;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .mood-button {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: transform 0.3s;
+      background-color: #ffe6e6;
+      color: #4b1248;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .mood-button:hover {
+      transform: scale(1.1);
+    }
+
+    .quote {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      line-height: 1.5;
+      font-weight: bold;
+    }
+
+    .quote.visible {
+      opacity: 1;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p, .quote {
+        font-size: 1rem;
+      }
+      .mood-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+footer {
+    position: fixed; /* Fix position at the bottom */
+    bottom: 0; /* Align to the bottom */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width */
+    text-align: center; /* Center the text */
+    font-size: 1rem; /* Font size */
+    color: white; /* Text color */
+    padding: 1rem; /* Padding for the footer */
+}
+  </style>
+</head>
+<body>
+  <h1>For You, My Wonderful Friend</h1>
+  <p id="daily-quote" style="font-size: 1.5rem; color: #ffe6e6;"></p>
+  <p>Thank you for always being there. Pick how you’re feeling and let me try to make your day a little brighter.</p>
+
+  <div class="buttons">
+    <button class="mood-button" onclick="showQuote('happy')">Happy 😊</button>
+    <button class="mood-button" onclick="showQuote('sad')">Sad 😢</button>
+    <button class="mood-button" onclick="showQuote('angry')">Angry 😠</button>
+    <button class="mood-button" onclick="showQuote('frustrated')">Frustrated 😤</button>
+    <button class="mood-button" onclick="showQuote('demotivated')">Demotivated 😞</button>
+  </div>
+
+  <div id="quote" class="quote"></div>
+	
+<footer>
+    <p>I know it's a litte shitty looking website. It will get better!</p>
+  </footer>
+
+  <script>
+    const quotes = {
+          happy: [
+        "You always look so pretty when you smile, so keep smiling.",
+        "Your smile makes me smile.",
+        "When you are happy, I automatically become happy.",
+        "You look very adorable when you are happy.",
+        "Why do you even cry when you have this amazing smile?",
+        "You give the panda energy when you smile.",
+        "I hope you are happy forever.",
+        "Your smile cherishes your eyes when you are happy.",
+        "Happiness looks beautiful on you.",
+        "Your joy is contagious; it brightens my day."
+    ],
+    sad: [
+        "It’s okay to feel sad sometimes.",
+        "Remember, this feeling will pass; brighter days are ahead.",
+        "Take your time to heal.",
+        "It’s okay to lean on others for support.",
+        "Your sadness will pass, I am here for you deep.",
+        "Whenever you feel like talking dont forget I am here for you.",
+        "It's okay to cry; it's a natural way to release emotions.",
+        "You are stronger than you know; you will get through this.",
+        "Let it out, Its not good to vent your emotions.",
+        "I’m here for you, no matter what you’re going through.",
+	"Call me asap??, and discuss whats going on",
+    ],
+    angry: [
+        "It's okay to feel angry.",
+        "Take a deep breath; you’ve got this.",
+        "Dont make any dumb decisions when you are angry.",
+        "Channel your anger into something positive.",
+        "Remember, you are in control of how you react.",
+        "It’s okay to express your feelings; just do it constructively.",
+        "Your voice matters; don’t be afraid to speak up.",
+        "If you are calm in anger then thats the strongest power you got there.",
+        "Let go of what you cannot control.",
+        "Your feelings are important; acknowledge them.",
+	"You can vent out your anger on me,You know that right?",
+    ],
+    frustrated: [
+        "It’s normal to feel frustrated; everyone experiences it.",
+        "Take a step back; sometimes a break helps.",
+        "Remember, progress takes time; be patient with yourself.",
+        "Your hard work will pay off; don’t give up.",
+        "It’s okay to ask for help when things get tough.",
+        "Frustration is a sign that you care deeply.",
+        "You are capable of overcoming any obstacle.",
+        "Focus on what you can control; let go of the rest.",
+        "Every challenge is an opportunity to grow.",
+        "You are not alone in feeling this way; I’m here for you."
+    ],
+    demotivated: [
+        "Everyone feels demotivated sometimes; it’s part of the journey.",
+        "Remember why you started; reignite that passion.",
+        "Small steps are still progress; keep moving forward.",
+        "It’s okay to take a break; self-care is important.",
+        "You’ve overcome challenges before; you can do it again.",
+        "Surround yourself with positivity; it makes a difference.",
+        "Your efforts matter, even if you don’t see immediate results.",
+        "Focus on the journey, not just the destination.",
+        "You are capable of achieving your goals; believe in yourself.",
+        "It’s okay to feel lost; clarity will come in time."
+    ]
+};
+
+    const backgroundImages = {
+      happy: [
+        "https://images.unsplash.com/photo-1530092285049-1c42085fd395?fm=jpg&q=60&w=3000",
+        "https://i.pinimg.com/550x/a2/c4/b7/a2c4b7a403dd6b231095225509787bd8.jpg",
+        "https://plus.unsplash.com/premium_photo-1676070095982-bcd632341498?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aGFwcHklMjBmbG93ZXJ8ZW58MHx8MHx8fDA%3D",
+"https://images.unsplash.com/photo-1649580730830-8e25c1a30a51?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGFwcHklMjBmbG93ZXJ8ZW58MHx8MHx8fDA%3D",
+"https://darceyflowers.ae/wp-content/uploads/2023/01/Blue-daisy-1024x819.webp",
+"https://hips.hearstapps.com/hmg-prod/images/flowers-royalty-free-image-997959716-1548454745.jpg",
+"https://i.pinimg.com/736x/90/40/03/9040034f5d635f46a4fb92128964fcca.jpg",
+"https://i.pinimg.com/control/564x/2e/cf/06/2ecf067a2069128f44d75d25a32e219e.jpg",
+"https://wallpapers.com/images/featured/flower-pictures-unpxbv1q9kxyqr1d.jpg",
+"https://cdn.britannica.com/84/73184-050-05ED59CB/Sunflower-field-Fargo-North-Dakota.jpg"
+      ],
+      sad: [
+        "https://plus.unsplash.com/premium_photo-1664116928588-678ad7390c70?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZnVsbCUyMG1vb258ZW58MHx8MHx8fDA%3D",
+        "https://www.shutterstock.com/image-photo/romantic-night-scene-beautiful-pink-600nw-2261269699.jpg",
+"https://i.pinimg.com/736x/28/b7/65/28b76576110744bed073318e41600fb5.jpg",
+"https://img.freepik.com/premium-photo/forest-dew-sky-summer-season-spring-stars-night-nature-natural-moon-meadow-tree-landsca_932514-47865.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/%D0%A1%D0%B2%D0%B5%D1%82_%D0%BE%D1%82_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BD%D0%B8_-_panoramio.jpg/1200px-%D0%A1%D0%B2%D0%B5%D1%82_%D0%BE%D1%82_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BD%D0%B8_-_panoramio.jpg",
+"https://wallpapers.com/images/featured/dark-night-pictures-80kcxoa2szb17vmq.jpg",
+"https://images.squarespace-cdn.com/content/v1/554e1c83e4b08a0248ca70c4/1c085521-c6d0-4361-bcda-879830971dc0/twitter-13-5.jpg",
+"https://st.depositphotos.com/1203257/1718/i/450/depositphotos_17180881-stock-photo-a-night-in-the-park.jpg",
+"https://i.pinimg.com/736x/f7/02/be/f702be2875f1d4289e759b8e7453f46e.jpg",
+"https://www.streethunters.net/wp-content/uploads/2013/07/night-walking-by-the-lamps.jpg",
+"https://floweraura-blog-img.s3.ap-south-1.amazonaws.com/corporate-gifts-blog/rest-on-shoulder-hug.jpg"
+      ],
+      angry: [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3_fRabvOqGBE0IbGMFTEQKFuPxP38-O5LmA&s",
+        "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b7a19fef-2190-4198-90e1-ba6ccc114f49/d1tyo4c-41d22811-ba6a-4ace-a74c-92dc9801983d.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I3YTE5ZmVmLTIxOTAtNDE5OC05MGUxLWJhNmNjYzExNGY0OVwvZDF0eW80Yy00MWQyMjgxMS1iYTZhLTRhY2UtYTc0Yy05MmRjOTgwMTk4M2QuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.r11XreU8BbUBrgoi-kfwfYFxOYS7iO8f5PELPE9Z3IE",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXdwZY-DrfhPWQF4I6kygl4pfmEQNtcuFMiw&s",
+"https://media.istockphoto.com/id/881737236/vector/brush-line.jpg?s=612x612&w=0&k=20&c=hOQgs9ydwg4ztjCU72zJWZVNEl6rpOOZtlgvO-Pk4hA=",
+"https://pics.craiyon.com/2023-10-03/9ebc7c9055e143a084716a8a2747f0f2.webp",
+"https://i.etsystatic.com/5949659/r/il/3d409b/1448193375/il_570xN.1448193375_tm0q.jpg",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXsRzX5PGkY2lyLBoknXd5r66faU29gvPQwybhYcH60RBK8yweTN51qysBVAGFaZYqbBE&usqp=CAU",
+
+      ],
+      frustrated: [
+        "https://images.nightcafe.studio/jobs/v2yswHUVWldl3upxKMio/v2yswHUVWldl3upxKMio--1--s48e2.jpg?tr=w-1600,c-at_max",
+        "https://thumbs.dreamstime.com/b/creative-crisis-fatigue-mental-stress-depression-frustration-concept-young-depressed-frustrated-upset-woman-girl-writer-artist-178651711.jpg",
+        "https://t4.ftcdn.net/jpg/03/09/57/65/360_F_309576547_Jxmy5JOuRH3fbmaximA6wERriBEqxPW7.jpg",
+"https://media.istockphoto.com/id/1451768057/photo/depressed-woman-sadness-and-headache-concept.jpg?s=612x612&w=0&k=20&c=i_lDVDbisF7TVfPc3iBUSv9_6YZKvuMWNsov8Q4Yl0M=",
+"https://www.storiedmind.com/wp-content/uploads/2009/11/Alone-450x337.jpg",
+"https://w0.peakpx.com/wallpaper/330/210/HD-wallpaper-trapped-alone-depressed-lonely-sad.jpg"
+
+
+      ],
+      demotivated: [
+        "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/blogs/25014/images/najg43GTrqJyin9x3WV6_Main_Regain_Motivation.jpg",
+        "https://t4.ftcdn.net/jpg/04/17/95/59/360_F_417955995_pAmSr4seo8NUkNcIgXsC94UnRaO9XwRD.jpg",
+        "https://st.depositphotos.com/1766930/4703/i/450/depositphotos_47039409-stock-photo-notice-board-with-sticky-note.jpg",
+"https://static.vecteezy.com/system/resources/thumbnails/015/992/055/small/try-one-more-time-motivational-note-photo.jpg",
+"https://img.freepik.com/premium-photo/brick-blocks-with-words-you-deserve-be-well-beautiful-green-background-wooden-table_606207-933.jpg",
+"https://img.freepik.com/premium-photo/motivational-concept-believe-you-can-you-will-win-brick-blocks-beautiful-green-background_606207-1781.jpg",
+"https://st2.depositphotos.com/1766930/5240/i/450/depositphotos_52402263-stock-photo-notice-board-with-sticky-note.jpg",
+      ]
+    };
+
+    const dailyQuoteText = "You're very very pretty human being, Take care of your health and your family's health, you are amazing😊😊";
+
+    function initializePage() {
+      document.getElementById('daily-quote').innerText = `Today's Message for you: ${dailyQuoteText}`;
+      let visitCount = localStorage.getItem('visitCount') || 0;
+      visitCount++;
+      localStorage.setItem('visitCount', visitCount);
+      console.log(`This page has been visited ${visitCount} times.`);
+    }
+
+    function showQuote(mood) {
+      const quoteContainer = document.getElementById("quote");
+      const randomQuote = quotes[mood][Math.floor(Math.random() * quotes[mood].length)];
+      const randomImage = backgroundImages[mood][Math.floor(Math.random() * backgroundImages[mood].length)];
+
+      quoteContainer.innerText = randomQuote;
+      document.body.style.backgroundImage = `url(${randomImage})`;
+      quoteContainer.classList.add("visible");
+    }
+
+    initializePage();
+  </script>
+</body>
+</html>
